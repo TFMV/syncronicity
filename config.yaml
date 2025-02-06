@@ -1,4 +1,4 @@
-project_id: "my-gcp-project"
-dataset: "my_dataset"
-table: "my_table"
-snowflake_dsn: "user:password@account/db/schema"
+project_id: "tfmv-371720"
+dataset: "tfmv"
+table: "foo"
+snowflake_dsn: "tfmv:Birst$1482@YP29273.us-central1.gcp.snowflakecomputing.com/tfmv/public"
