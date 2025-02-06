@@ -1,0 +1,4 @@
+project_id: "my-gcp-project"
+dataset: "my_dataset"
+table: "my_table"
+snowflake_dsn: "user:password@account/db/schema"
