@@ -1,4 +1,5 @@
 project_id: "tfmv-371720"
 dataset: "tfmv"
 table: "foo"
-snowflake_dsn: "tfmv:Birst$1482@YP29273.us-central1.gcp.snowflakecomputing.com/tfmv/public"
+snowflake_dsn: "tfmv:notapassword@YP29273.us-central1.gcp.snowflakecomputing.com/tfmv/public"
+snowflake_stage: "SYNCHRONICITY_STAGE"
