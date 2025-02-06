@@ -30,3 +30,5 @@ sa.json
 config.yaml
 
 *.parquet
+
+.DS_Store

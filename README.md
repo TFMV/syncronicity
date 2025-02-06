@@ -6,6 +6,10 @@ BigQuery to Snowflake Migration Tool
 
 syncronicity is a tool that migrates data from BigQuery to Snowflake using Arrow format.
 
+## Flow
+
+![Flow](docs/flow.png)
+
 ## Features
 
 - Apache Arrow-Powered – Optimized for columnar data transfer.

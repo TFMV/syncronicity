@@ -95,7 +95,11 @@ func (c *Client) WriteArrowRecordToParquet(ctx context.Context, record arrow.Rec
 		parquet.WithBatchSize(64*1024*1024), // 64 MB batch size.
 		parquet.WithVersion(parquet.V2_LATEST),
 	)
-	arrowWriterProps := pqarrow.NewArrowWriterProperties()
+
+	arrowWriterProps := pqarrow.NewArrowWriterProperties(
+		pqarrow.WithStoreSchema(),
+		pqarrow.WithAllocator(memory.DefaultAllocator),
+	)
 
 	writer, err := pqarrow.NewFileWriter(record.Schema(), file, writerProps, arrowWriterProps)
 	if err != nil {

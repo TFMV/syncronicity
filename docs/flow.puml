@@ -1,0 +1,57 @@
+@startuml
+header
+**Synchronicity: BigQuery to Snowflake Data Pipeline**
+endheader
+
+title BigQuery → Snowflake using Apache Arrow
+
+skinparam handwritten false
+skinparam shadowing true
+scale 900 width
+skinparam monochrome false
+autonumber
+
+participant "<$go>\nSynchronicity CLI" as CLI <<(C,#ADD8E6)>>
+participant "<$BigQuery>\nBigQuery Storage API" as BigQuery <<(C,#FFF8DC)>>
+participant "<$go>\ngRPC Stream" as gRPC <<(C,#ADD8E6)>>
+participant "<$postgresql>\nApache Arrow RecordBatch" as Arrow <<(C,#90EE90)>>
+participant "<$Lambda>\nParquet Writer" as Parquet <<(C,#ADD8E6)>>
+participant "<$S3>\nSnowflake Stage" as SnowflakeStage <<(C,#FFF8DC)>>
+participant "<$DynamoDB>\nSnowflake ADBC" as SnowflakeADBC <<(C,#90EE90)>>
+
+box "Application" #ADD8E6
+	participant CLI
+	participant gRPC
+	participant Arrow
+    participant Parquet
+end box
+
+box "Google Cloud" #FFF8DC
+	participant BigQuery
+end box
+
+box "Snowflake Cloud" #90EE90
+    participant SnowflakeStage
+    participant SnowflakeADBC
+end box
+
+CLI -> BigQuery : Request Arrow Data (gRPC)
+BigQuery -> gRPC : Stream Arrow RecordBatches
+gRPC -> Arrow : Process and Decode Arrow Data
+Arrow -> Parquet : Write Arrow Data to Parquet File
+Parquet -> SnowflakeStage : PUT Parquet File to Snowflake Stage
+SnowflakeStage -> SnowflakeADBC : COPY INTO Snowflake Table
+SnowflakeADBC -> CLI : Confirm Data Ingestion Completed
+
+note right of Parquet
+  Uses Apache Parquet Format
+  to store Arrow Data
+  before uploading to Snowflake.
+end note
+
+note right of SnowflakeADBC
+  Executes "COPY INTO" 
+  for efficient bulk loading
+  of Arrow-encoded Parquet data.
+end note
+@enduml
