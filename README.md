@@ -8,11 +8,11 @@ syncronicity is a tool that migrates data from BigQuery to Snowflake using Arrow
 
 ## Features
 
-✅ Apache Arrow-Powered – Optimized for columnar data transfer.
-✅ BigQuery Storage API – Streams data efficiently to Parquet files.
-✅ Snowflake COPY Command – Ingest parquet files into Snowflake.
-✅ Hot-Reloading Config – No need to restart on config changes.
-✅ CLI + Config Flexibility – Use config.yaml or override via CLI.
+- Apache Arrow-Powered – Optimized for columnar data transfer.
+- BigQuery Storage API – Streams data efficiently to Parquet files.
+- Snowflake COPY Command – Ingest parquet files into Snowflake.
+- Hot-Reloading Config – No need to restart on config changes.
+- CLI + Config Flexibility – Use config.yaml or override via CLI.
 
 ## Usage
 
